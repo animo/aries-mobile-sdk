@@ -5,18 +5,17 @@ interface IndyCredentialFormat {
   linkedAttachments?: LinkedAttachment[]
 }
 
-
-type IssuerId = string;
+type IssuerId = string
 
 interface IssuerNode {
-  id: string;
-  [x: string]: any;
+  id: string
+  [x: string]: any
 }
 
-type Issuer = IssuerId | IssuerNode;
+type Issuer = IssuerId | IssuerNode
 
 interface LinkedDataCredentialFormat {
-  "@context": any
+  '@context': any
   issuer: Issuer
   type: string | string[]
   issuanceDate: string

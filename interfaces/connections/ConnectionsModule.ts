@@ -1,53 +1,53 @@
 interface ConnectionsModule {
   createConnection(config?: {
-    autoAcceptConnection?: boolean;
-    alias?: string;
-    mediatorId?: string;
-    multiUseInvitation?: boolean;
+    autoAcceptConnection?: boolean
+    alias?: string
+    mediatorId?: string
+    multiUseInvitation?: boolean
   }): Promise<{
-    invitation: ConnectionInvitationMessage;
-    connectionRecord: ConnectionRecord;
-  }>;
+    invitation: ConnectionInvitationMessage
+    connectionRecord: ConnectionRecord
+  }>
 
   receiveInvitation(
     invitation: ConnectionInvitationMessage,
     config?: {
-      autoAcceptConnection?: boolean;
-      alias?: string;
-      mediatorId?: string;
+      autoAcceptConnection?: boolean
+      alias?: string
+      mediatorId?: string
     }
-  ): Promise<ConnectionRecord>;
+  ): Promise<ConnectionRecord>
 
   receiveInvitationFromUrl(
     invitationUrl: string,
     config?: {
-      autoAcceptConnection?: boolean;
-      alias?: string;
-      mediatorId?: string;
+      autoAcceptConnection?: boolean
+      alias?: string
+      mediatorId?: string
     }
-  ): Promise<ConnectionRecord>;
+  ): Promise<ConnectionRecord>
 
-  acceptInvitation(connectionId: string): Promise<ConnectionRecord>;
-  
-  acceptRequest(connectionId: string): Promise<ConnectionRecord>;
+  acceptInvitation(connectionId: string): Promise<ConnectionRecord>
 
-  acceptResponse(connectionId: string): Promise<ConnectionRecord>;
+  acceptRequest(connectionId: string): Promise<ConnectionRecord>
 
-  returnWhenIsConnected(connectionId: string): Promise<ConnectionRecord>;
+  acceptResponse(connectionId: string): Promise<ConnectionRecord>
 
-  getAll();
+  returnWhenIsConnected(connectionId: string): Promise<ConnectionRecord>
 
-  getById(connectionId: string): Promise<ConnectionRecord>;
+  getAll()
 
-  findById(connectionId: string): Promise<ConnectionRecord | null>;
+  getById(connectionId: string): Promise<ConnectionRecord>
 
-  deleteById(connectionId: string);
+  findById(connectionId: string): Promise<ConnectionRecord | null>
 
-  findByVerkey(verkey: string): Promise<ConnectionRecord | null>;
+  deleteById(connectionId: string)
 
-  findByTheirKey(verkey: string): Promise<ConnectionRecord | null>;
+  findByVerkey(verkey: string): Promise<ConnectionRecord | null>
 
-  findByInvitationKey(key: string): Promise<ConnectionRecord | null>;
+  findByTheirKey(verkey: string): Promise<ConnectionRecord | null>
 
-  getByThreadId(threadId: string): Promise<ConnectionRecord>;
+  findByInvitationKey(key: string): Promise<ConnectionRecord | null>
+
+  getByThreadId(threadId: string): Promise<ConnectionRecord>
 }

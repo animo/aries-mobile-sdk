@@ -3,61 +3,59 @@ interface ProofsModule {
     connectionId: string,
     presentationProposal: PresentationPreview,
     config?: {
-      comment?: string;
-      autoAcceptProof?: AutoAcceptProof;
+      comment?: string
+      autoAcceptProof?: AutoAcceptProof
     }
-  ): Promise<ProofRecord>;
+  ): Promise<ProofRecord>
 
   acceptProposal(
     proofRecordId: string,
     config?: {
       request?: {
-        name?: string;
-        version?: string;
-        nonce?: string;
-      };
-      comment?: string;
+        name?: string
+        version?: string
+        nonce?: string
+      }
+      comment?: string
     }
-  ): Promise<ProofRecord>;
+  ): Promise<ProofRecord>
 
   requestProof(
     connectionId: string,
     proofRequestOptions: CreateProofRequestOptions,
     config?: ProofRequestConfig
-  ): Promise<ProofRecord>;
+  ): Promise<ProofRecord>
 
   createOutOfBandRequest(
     proofRequestOptions: CreateProofRequestOptions,
     config?: ProofRequestConfig
   ): Promise<{
-    requestMessage: RequestPresentationMessage;
-    proofRecord: ProofRecord;
-  }>;
+    requestMessage: RequestPresentationMessage
+    proofRecord: ProofRecord
+  }>
 
   acceptRequest(
     proofRecordId: string,
     requestedCredentials: RequestedCredentials,
     config?: {
-      comment?: string;
+      comment?: string
     }
-  ): Promise<ProofRecord>;
+  ): Promise<ProofRecord>
 
-  acceptPresentation(proofRecordId: string): Promise<ProofRecord>;
+  acceptPresentation(proofRecordId: string): Promise<ProofRecord>
 
   getRequestedCredentialsForProofRequest(
     proofRequest: ProofRequest,
     presentationProposal?: PresentationPreview
-  ): Promise<RetrievedCredentials>;
+  ): Promise<RetrievedCredentials>
 
-  autoSelectCredentialsForProofRequest(
-    retrievedCredentials: RetrievedCredentials
-  ): RequestedCredentials;
+  autoSelectCredentialsForProofRequest(retrievedCredentials: RetrievedCredentials): RequestedCredentials
 
-  getAll(): Promise<ProofRecord[]>;
+  getAll(): Promise<ProofRecord[]>
 
-  getById(proofRecordId: string): Promise<ProofRecord>;
+  getById(proofRecordId: string): Promise<ProofRecord>
 
-  findById(proofRecordId: string): Promise<ProofRecord | null>;
-  
-  deleteById(proofId: string);
+  findById(proofRecordId: string): Promise<ProofRecord | null>
+
+  deleteById(proofId: string)
 }
