@@ -7,9 +7,7 @@ interface LedgerModule {
 
   getSchema(id: string): Promise<Schema>
 
-  registerCredentialDefinition(
-    credentialDefinitionTemplate: Omit<CredentialDefinitionTemplate, 'signatureType'>
-  ): Promise<CredDef>
+  registerCredentialDefinition(credentialDefinitionTemplate: Omit<CredentialDefinitionTemplate, 'signatureType'>): Promise<CredDef>
 
   getCredentialDefinition(id: string): Promise<CredDef>
 }

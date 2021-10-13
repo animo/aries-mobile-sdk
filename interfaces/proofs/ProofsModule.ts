@@ -20,11 +20,7 @@ interface ProofsModule {
     }
   ): Promise<ProofRecord>
 
-  requestProof(
-    connectionId: string,
-    proofRequestOptions: CreateProofRequestOptions,
-    config?: ProofRequestConfig
-  ): Promise<ProofRecord>
+  requestProof(connectionId: string, proofRequestOptions: CreateProofRequestOptions, config?: ProofRequestConfig): Promise<ProofRecord>
 
   createOutOfBandRequest(
     proofRequestOptions: CreateProofRequestOptions,

@@ -1,59 +1,51 @@
-import { CredentialOfferTemplate } from './interfaces'
+import {
+  OfferCredentialTemplate,
+  CredentialExchangeRecord,
+  ProposeCredentialTemplate,
+  AcceptProposalTemplate,
+  NegotiateProposalTemplate,
+} from './interfaces'
 
 interface CredentialModule {
-  proposeCredential(connectionId: string, config?: CredentialProposeOptions): Promise<CredentialRecord>
+  // Proposal
+  proposeCredential(credentialTemplate: ProposeCredentialTemplate): Promise<CredentialExchangeRecord>
+  acceptProposal(credentialRecordId: string, credentialTemplate: AcceptProposalTemplate): Promise<CredentialExchangeRecord>
+  negotiateProposal(credentialRecordId: string, credentialTemplate: NegotiateProposalTemplate): Promise<CredentialExchangeRecord>
 
-  acceptProposal(
-    credentialRecordId: string,
-    config?: {
-      comment?: string
-      credentialDefinitionId?: string
-      autoAcceptCredential?: AutoAcceptCredential
-    }
-  ): Promise<CredentialRecord>
-
-  negotiateProposal(
-    credentialRecordId: string,
-    preview: CredentialPreview,
-    config?: {
-      comment?: string
-      credentialDefinitionId?: string
-      autoAcceptCredential?: AutoAcceptCredential
-    }
-  ): Promise<CredentialRecord>
-
-  offerCredential(credentialTemplate: CredentialOfferTemplate): Promise<CredentialRecord>
+  // Offer
+  offerCredential(credentialTemplate: OfferCredentialTemplate): Promise<CredentialExchangeRecord>
 
   createOutOfBandOffer(credentialTemplate: CredentialOfferTemplate): Promise<{
     offerMessage: OfferCredentialMessage
-    credentialRecord: CredentialRecord
+    credentialRecord: CredentialExchangeRecord
   }>
 
   acceptOffer(
     credentialRecordId: string,
     config?: { comment?: string; autoAcceptCredential?: AutoAcceptCredential }
-  ): Promise<CredentialRecord>
+  ): Promise<CredentialExchangeRecord>
 
-  declineOffer(credentialRecordId: string): Promise<CredentialRecord>
+  declineOffer(credentialRecordId: string): Promise<CredentialExchangeRecord>
 
   negotiateOffer(
     credentialRecordId: string,
     preview: CredentialPreview,
     config?: { comment?: string; autoAcceptCredential?: AutoAcceptCredential }
-  ): Promise<CredentialRecord>
+  ): Promise<CredentialExchangeRecord>
 
   acceptRequest(
     credentialRecordId: string,
     config?: { comment?: string; autoAcceptCredential?: AutoAcceptCredential }
-  ): Promise<CredentialRecord>
+  ): Promise<CredentialExchangeRecord>
 
-  acceptCredential(credentialRecordId: string): Promise<CredentialRecord>
+  acceptCredential(credentialRecordId: string): Promise<CredentialExchangeRecord>
 
-  getAll(): Promise<CredentialRecord[]>
-
-  getById(credentialRecordId: string): Promise<CredentialRecord>
-
-  findById(connectionId: string): Promise<CredentialRecord | null>
-
-  deleteById(credentialId: string): Promise<void>
+  // Record Methods
+  getAll(): Promise<CredentialExchangeRecord[]>
+  getById(credentialRecordId: string): Promise<CredentialExchangeRecord>
+  findById(credentialRecordId: string): Promise<CredentialExchangeRecord | null>
+  deleteById(credentialRecordId: string): Promise<void>
+  findByQuery(query: Record<string, Tag | string[]>): Promise<CredentialExchangeRecord[]>
 }
+
+type Tag = string | boolean | number
