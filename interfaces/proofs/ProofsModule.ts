@@ -1,42 +1,30 @@
-interface ProofsModule {
-  proposeProof(
-    connectionId: string,
-    presentationProposal: PresentationPreview,
-    config?: {
-      comment?: string
-      autoAcceptProof?: AutoAcceptProof
-    }
-  ): Promise<ProofRecord>
+import {
+  PresentationPreview,
+  ProposeProofConfig,
+  ProofRecord,
+  AcceptProposalConfig,
+  CreateProofRequestOptions,
+  ProofRequestConfig,
+  RequestPresentationMessage,
+  RequestedCredentials,
+  ProofRequest,
+  RetrievedCredentials,
+  AcceptRequestConfig,
+} from './interfaces'
 
-  acceptProposal(
-    proofRecordId: string,
-    config?: {
-      request?: {
-        name?: string
-        version?: string
-        nonce?: string
-      }
-      comment?: string
-    }
-  ): Promise<ProofRecord>
+interface ProofsModule {
+  proposeProof(connectionId: string, presentationProposal: PresentationPreview, config?: ProposeProofConfig): Promise<ProofRecord>
+
+  acceptProposal(proofRecordId: string, config?: AcceptProposalConfig): Promise<ProofRecord>
 
   requestProof(connectionId: string, proofRequestOptions: CreateProofRequestOptions, config?: ProofRequestConfig): Promise<ProofRecord>
 
   createOutOfBandRequest(
     proofRequestOptions: CreateProofRequestOptions,
     config?: ProofRequestConfig
-  ): Promise<{
-    requestMessage: RequestPresentationMessage
-    proofRecord: ProofRecord
-  }>
+  ): Promise<{ requestMessage: RequestPresentationMessage; proofRecord: ProofRecord }>
 
-  acceptRequest(
-    proofRecordId: string,
-    requestedCredentials: RequestedCredentials,
-    config?: {
-      comment?: string
-    }
-  ): Promise<ProofRecord>
+  acceptRequest(proofRecordId: string, requestedCredentials: RequestedCredentials, config?: AcceptRequestConfig): Promise<ProofRecord>
 
   acceptPresentation(proofRecordId: string): Promise<ProofRecord>
 
@@ -55,3 +43,5 @@ interface ProofsModule {
 
   deleteById(proofId: string)
 }
+
+export { ProofsModule }
