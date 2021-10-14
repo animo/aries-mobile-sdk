@@ -7,7 +7,4 @@ interface DiscloseFeaturesConfig {
   // to be defined
 }
 
-export {
-  QueryFeaturesConfig,
-  DiscloseFeaturesConfig
-}
+export { QueryFeaturesConfig, DiscloseFeaturesConfig }

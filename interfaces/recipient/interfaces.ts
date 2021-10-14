@@ -6,7 +6,4 @@ interface Subscription {
   // to be defined
 }
 
-export {
-  MediationRecord,
-  Subscription
-}
+export { MediationRecord, Subscription }

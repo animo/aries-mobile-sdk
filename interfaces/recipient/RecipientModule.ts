@@ -1,5 +1,5 @@
-import { ConnectionRecord } from '../connections/interfaces';
-import { MediationRecord, Subscription } from './interfaces';
+import { ConnectionRecord } from '../connections/interfaces'
+import { MediationRecord, Subscription } from './interfaces'
 
 interface RecipientModule {
   initialize(): Promise<void>
@@ -29,6 +29,4 @@ interface RecipientModule {
   provision(mediatorConnInvite: string): Promise<MediationRecord | null>
 }
 
-export {
-  RecipientModule
-}
+export { RecipientModule }

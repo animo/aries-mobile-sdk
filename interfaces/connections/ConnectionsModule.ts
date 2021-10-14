@@ -1,7 +1,9 @@
-import { ConnectionInvitationMessage, ConnectionRecord, CreateConnectionConfig, ReceiveInvitationConfig } from './interfaces';
+import { ConnectionInvitationMessage, ConnectionRecord, CreateConnectionConfig, ReceiveInvitationConfig } from './interfaces'
 
 interface ConnectionsModule {
-  createConnection(config?: CreateConnectionConfig): Promise<{invitation: ConnectionInvitationMessage, connectionRecord: ConnectionRecord}>
+  createConnection(
+    config?: CreateConnectionConfig
+  ): Promise<{ invitation: ConnectionInvitationMessage; connectionRecord: ConnectionRecord }>
 
   receiveInvitation(invitation: ConnectionInvitationMessage, config?: ReceiveInvitationConfig): Promise<ConnectionRecord>
 

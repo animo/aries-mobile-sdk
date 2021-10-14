@@ -19,9 +19,4 @@ interface CreateConnectionConfig {
   multiUseInvitation?: boolean
 }
 
-export {
-  ConnectionInvitationMessage,
-  ConnectionRecord,
-  ReceiveInvitationConfig,
-  CreateConnectionConfig
-}
+export { ConnectionInvitationMessage, ConnectionRecord, ReceiveInvitationConfig, CreateConnectionConfig }
