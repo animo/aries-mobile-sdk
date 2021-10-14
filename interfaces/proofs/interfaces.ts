@@ -61,6 +61,7 @@ interface AcceptRequestConfig {
 
 export {
   AutoAcceptProof,
+  AcceptRequestConfig,
   AcceptProposalConfig,
   CreateProofRequestOptions,
   PresentationPreview,
