@@ -1,3 +1,6 @@
+import { ConnectionRecord } from '../connections/interfaces';
+import { MediationRecord, Subscription } from './interfaces';
+
 interface RecipientModule {
   initialize(): Promise<void>
 
@@ -15,13 +18,17 @@ interface RecipientModule {
 
   findByConnectionId(connectionId: string): Promise<MediationRecord | undefined>
 
-  getMediators(): Promise<MediationRecords[]>
+  getMediators(): Promise<MediationRecord[]>
 
   findDefaultMediator(): Promise<MediationRecord | null>
 
   findDefaultMediatorConnection(): Promise<ConnectionRecord | null>
 
-  requestAndAwaitGrant(connection: ConnectionRecord, timeoutMs = 10000): Promise<MediationRecord>
+  requestAndAwaitGrant(connection: ConnectionRecord, timeoutMs: number): Promise<MediationRecord>
 
   provision(mediatorConnInvite: string): Promise<MediationRecord | null>
+}
+
+export {
+  RecipientModule
 }
