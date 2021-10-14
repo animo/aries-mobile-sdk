@@ -1,3 +1,5 @@
+import { NymRole, GetNymResponse, SchemaTemplate, Schema, CredentialDefinitionTemplate, CredDef } from './interfaces'
+
 interface LedgerModule {
   registerPublicDid(did: string, verkey: string, alias: string, role?: NymRole): Promise<string>
 
@@ -11,3 +13,5 @@ interface LedgerModule {
 
   getCredentialDefinition(id: string): Promise<CredDef>
 }
+
+export { LedgerModule }
