@@ -1,6 +1,15 @@
-# Aries Mobile SDK
+<p align="center">
+  <br />
+<img
+    alt="Animo logo"
+    src="./assets/animo-logo.jpeg"
+    height="250px"
+  />
 
-An open source toolkit to build mobile SSI solutions with ease. For an overview of the project, see the slides [here](https://drive.google.com/file/d/1t9_XljI9rvFrgvNVM7ymxFae3Xo0Nhvx/view?usp=sharing).
+</p>
+
+<h1 align="center"><b>Aries Mobile SDK</b></h1>
+<p align="center">An open source toolkit to build mobile SSI solutions with ease. For an overview of the project, see the slides <a href="https://drive.google.com/file/d/1t9_XljI9rvFrgvNVM7ymxFae3Xo0Nhvx/view?usp=sharing">here</a>.</p>
 
 ## Deliverables
 
