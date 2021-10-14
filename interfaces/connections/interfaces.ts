@@ -6,4 +6,22 @@ interface ConnectionRecord {
   // to be defined
 }
 
-export { ConnectionInvitationMessage, ConnectionRecord }
+interface ReceiveInvitationConfig {
+  autoAcceptConnection?: boolean
+  alias?: string
+  mediatorId?: string
+}
+
+interface CreateConnectionConfig {
+  autoAcceptConnection?: boolean
+  alias?: string
+  mediatorId?: string
+  multiUseInvitation?: boolean
+}
+
+export {
+  ConnectionInvitationMessage,
+  ConnectionRecord,
+  ReceiveInvitationConfig,
+  CreateConnectionConfig
+}
