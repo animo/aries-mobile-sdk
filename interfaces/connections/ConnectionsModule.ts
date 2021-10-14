@@ -1,31 +1,11 @@
+import { ConnectionInvitationMessage, ConnectionRecord, CreateConnectionConfig, ReceiveInvitationConfig } from './interfaces';
+
 interface ConnectionsModule {
-  createConnection(config?: {
-    autoAcceptConnection?: boolean
-    alias?: string
-    mediatorId?: string
-    multiUseInvitation?: boolean
-  }): Promise<{
-    invitation: ConnectionInvitationMessage
-    connectionRecord: ConnectionRecord
-  }>
+  createConnection(config?: CreateConnectionConfig): Promise<{invitation: ConnectionInvitationMessage, connectionRecord: ConnectionRecord}>
 
-  receiveInvitation(
-    invitation: ConnectionInvitationMessage,
-    config?: {
-      autoAcceptConnection?: boolean
-      alias?: string
-      mediatorId?: string
-    }
-  ): Promise<ConnectionRecord>
+  receiveInvitation(invitation: ConnectionInvitationMessage, config?: ReceiveInvitationConfig): Promise<ConnectionRecord>
 
-  receiveInvitationFromUrl(
-    invitationUrl: string,
-    config?: {
-      autoAcceptConnection?: boolean
-      alias?: string
-      mediatorId?: string
-    }
-  ): Promise<ConnectionRecord>
+  receiveInvitationFromUrl(invitationUrl: string, config?: ReceiveInvitationConfig): Promise<ConnectionRecord>
 
   acceptInvitation(connectionId: string): Promise<ConnectionRecord>
 
@@ -51,3 +31,5 @@ interface ConnectionsModule {
 
   getByThreadId(threadId: string): Promise<ConnectionRecord>
 }
+
+export { ConnectionsModule }
