@@ -1,37 +1,29 @@
 import {
-  PresentationPreview,
-  ProposeProofConfig,
+  ProposeProofOptions,
   ProofRecord,
-  AcceptProposalConfig,
-  CreateProofRequestOptions,
-  ProofRequestConfig,
-  RequestPresentationMessage,
+  AcceptProposalOptions,
+  ProofRequestOptions,
   RequestedCredentials,
-  ProofRequest,
   RetrievedCredentials,
-  AcceptRequestConfig,
+  AcceptRequestOptions,
+  CreateOutOfBandProofRequestOptions,
+  RequestPresentationMessage,
 } from './interfaces'
 
 interface ProofsModule {
-  proposeProof(connectionId: string, presentationProposal: PresentationPreview, config?: ProposeProofConfig): Promise<ProofRecord>
+  proposeProof(options: ProposeProofOptions): Promise<ProofRecord>
 
-  acceptProposal(proofRecordId: string, config?: AcceptProposalConfig): Promise<ProofRecord>
+  acceptProposal(options: AcceptProposalOptions): Promise<ProofRecord>
 
-  requestProof(connectionId: string, proofRequestOptions: CreateProofRequestOptions, config?: ProofRequestConfig): Promise<ProofRecord>
+  requestProof(options: ProofRequestOptions): Promise<ProofRecord>
 
   createOutOfBandRequest(
-    proofRequestOptions: CreateProofRequestOptions,
-    config?: ProofRequestConfig
+    options: CreateOutOfBandProofRequestOptions
   ): Promise<{ requestMessage: RequestPresentationMessage; proofRecord: ProofRecord }>
 
-  acceptRequest(proofRecordId: string, requestedCredentials: RequestedCredentials, config?: AcceptRequestConfig): Promise<ProofRecord>
+  acceptRequest(option: AcceptRequestOptions): Promise<ProofRecord>
 
   acceptPresentation(proofRecordId: string): Promise<ProofRecord>
-
-  getRequestedCredentialsForProofRequest(
-    proofRequest: ProofRequest,
-    presentationProposal?: PresentationPreview
-  ): Promise<RetrievedCredentials>
 
   autoSelectCredentialsForProofRequest(retrievedCredentials: RetrievedCredentials): RequestedCredentials
 
@@ -41,7 +33,7 @@ interface ProofsModule {
 
   findById(proofRecordId: string): Promise<ProofRecord | null>
 
-  deleteById(proofId: string)
+  deleteById(proofId: string): Promise<void>
 }
 
 export { ProofsModule }

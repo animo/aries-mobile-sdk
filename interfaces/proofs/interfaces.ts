@@ -2,27 +2,15 @@ interface ProofRecord {
   // to be defined
 }
 
-interface PresentationPreview {
-  // to be defined
-}
-
-interface CreateProofRequestOptions {
-  // to be defined
-}
-
-interface ProofRequestConfig {
-  // to be defined
-}
-
 interface RequestPresentationMessage {
   // to be defined
 }
 
-interface RequestedCredentials {
+interface ProofRequestOptions {
   // to be defined
 }
 
-interface ProofRequest {
+interface RequestedCredentials {
   // to be defined
 }
 
@@ -41,12 +29,34 @@ enum AutoAcceptProof {
   Never = 'never',
 }
 
-interface ProposeProofConfig {
+interface IndyProofFormat {
+  // to be defined
+}
+
+interface PresentationExchangeProofFormat {
+  // to be defined
+}
+
+enum ProtocolVersion {
+  v1 = '1',
+  v2 = '2',
+}
+
+interface ProposeProofFormats {
+  indy?: IndyProofFormat
+  presentationExchange?: PresentationExchangeProofFormat
+}
+
+interface ProposeProofOptions {
+  connectionId: string
+  protocolVersion: ProtocolVersion
+  proofFormat: ProposeProofFormats
   comment?: string
   autoAcceptProof?: AutoAcceptProof
 }
 
-interface AcceptProposalConfig {
+interface AcceptProposalOptions {
+  proofRecordId: string
   request?: {
     name?: string
     version?: string
@@ -55,21 +65,23 @@ interface AcceptProposalConfig {
   comment?: string
 }
 
-interface AcceptRequestConfig {
+interface AcceptRequestOptions {
   comment?: string
 }
 
+interface CreateOutOfBandProofRequestOptions {
+  // to be defined
+}
+
 export {
-  AutoAcceptProof,
-  AcceptRequestConfig,
-  AcceptProposalConfig,
-  CreateProofRequestOptions,
-  PresentationPreview,
-  ProofRecord,
-  ProofRequest,
-  ProofRequestConfig,
-  ProposeProofConfig,
+  CreateOutOfBandProofRequestOptions,
   RequestPresentationMessage,
+  AutoAcceptProof,
+  AcceptRequestOptions,
+  AcceptProposalOptions,
+  ProofRecord,
+  ProofRequestOptions,
+  ProposeProofOptions,
   RequestedCredentials,
   RetrievedCredentials,
 }
