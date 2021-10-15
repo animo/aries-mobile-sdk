@@ -1,5 +1,6 @@
-interface BasicMessagesModule {
-  sendMessage(connection: ConnectionRecord, message: string): Promise<void>
+import { SendBasicMessageOptions, BasicMessageTags, BasicMessageRecord } from './interfaces'
 
-  findAllByQuery(query: Partial<BasicMessageTags>): Promise<BasicMessageRecord[]>
+interface BasicMessagesModule {
+  sendMessage(connectionId: string, options: SendBasicMessageOptions): Promise<void>
+  findByQuery(query: Partial<BasicMessageTags>): Promise<BasicMessageRecord[]>
 }
