@@ -1,9 +1,7 @@
 import { ConnectionRecord } from '../connections/interfaces'
 import { MediationRecord, Subscription } from './interfaces'
 
-interface RecipientModule {
-  initialize(): Promise<void>
-
+interface MediationRecipientModule {
   initiateMessagePickup(mediator: MediationRecord): Promise<Subscription | undefined>
 
   discoverMediation(): Promise<MediationRecord | undefined>
@@ -29,4 +27,4 @@ interface RecipientModule {
   provision(mediatorConnInvite: string): Promise<MediationRecord | null>
 }
 
-export { RecipientModule }
+export { MediationRecipientModule }
