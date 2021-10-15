@@ -1,9 +1,4 @@
-type AnyJson = boolean | number | string | null | JsonArray | JsonMap
-interface JsonMap {
-  [key: string]: AnyJson
-}
-interface JsonArray extends Array<AnyJson> {}
-
+import { AnyJson, JsonMap } from '../generic'
 type IssuerId = string
 
 interface IssuerNode {
@@ -14,7 +9,11 @@ interface IssuerNode {
 type Issuer = IssuerId | IssuerNode
 type LDSignatureSuite = 'Ed25519Signature2018' | 'BbsBlsSignature2020'
 
-interface AutoAcceptCredential {} // Enum already exists in AFJ
+export enum AutoAcceptCredential {
+  Always = 'always',
+  ContentApproved = 'contentApproved',
+  Never = 'never',
+}
 
 interface LDCredential {
   '@context': string | Record<string, AnyJson>
@@ -97,30 +96,11 @@ interface CredentialExchangeRecord extends BaseRecord {
   role: CredentialRole
 
   // FIXME: Not sure if we want to store messages in the credential exchange record
-  //  or as separate record (see commented interface below for an idea of how that would work)
+  //  or as separate record (see interface in experimental file for an idea of how that would work)
   messages: Array<JsonMap>
 }
 
-// interface MessageRecord {
-//   message: AnyJson
-//   createdAt: Date
-//   threadId: string
-//   connectionId?: string
-//   role: MessageRole // 'sender' or 'receiver'
-
-//   // Can be computed
-//   protocolName: string
-//   versionMajor: string
-//   versionMinor: string
-//   messageType: string
-// }
-
-// const messages = messageRepository.findMessagesByQuery({
-//   threadId: "f5dedc93-6552-4757-85e2-e452da9656cd",
-//   protocolName: 'issue-credential',
-//   versionMajor: 2,
-//   messageType: 'propose-credential'
-// })
+interface CredentialRecordTags {}
 
 // Credential Record is only used for holding a credential
 interface CredentialRecord {
@@ -142,14 +122,6 @@ interface CredentialRecord {
   // TODO: should have easy way to access credential data
 }
 
-// FIXME: define structure for actual credential storage
-// We need to do a bit more research on how indy credentials
-// are stored. But we need to define the LD credential storage
-// structure ourselves
-interface CredentialStorage {
-  credential: LDCredential
-}
-
 /// CREDENTIAL OFFER
 interface IndyOfferCredentialFormat {
   credentialDefinitionId: string
@@ -161,9 +133,22 @@ interface OfferCredentialFormats {
   w3c?: W3CCredentialFormat
 }
 
-interface OfferCredentialTemplate {
+interface OfferCredentialOptions {
   connectionId: string
   protocolVersion: ProtocolVersion
+  credentialFormats: OfferCredentialFormats
+  autoAcceptCredential?: AutoAcceptCredential
+  comment?: string
+}
+
+interface AcceptOfferOptions {
+  credentialRecordId: string
+  comment?: string
+  autoAcceptCredential?: AutoAcceptCredential
+}
+
+interface NegotiateOfferOptions {
+  credentialRecordId: string
   credentialFormats: OfferCredentialFormats
   autoAcceptCredential?: AutoAcceptCredential
   comment?: string
@@ -188,7 +173,7 @@ interface ProposeCredentialFormats {
   w3c?: W3CCredentialFormat
 }
 
-interface ProposeCredentialTemplate {
+interface ProposeCredentialOptions {
   connectionId: string
   protocolVersion: ProtocolVersion
   credentialFormats: ProposeCredentialFormats
@@ -196,7 +181,8 @@ interface ProposeCredentialTemplate {
   comment?: string
 }
 
-interface AcceptProposalTemplate {
+interface AcceptProposalOptions {
+  credentialRecordId: string
   comment?: string
   autoAcceptCredential?: AutoAcceptCredential
   credentialFormats: {
@@ -212,17 +198,45 @@ interface AcceptProposalTemplate {
   }
 }
 
-interface NegotiateProposalTemplate {
+interface NegotiateProposalOptions {
+  credentialRecordId: string
   credentialFormats: OfferCredentialFormats
   autoAcceptCredential?: AutoAcceptCredential
   comment?: string
 }
 
+/// CREDENTIAL REQUEST
+
+interface RequestCredentialFormats {
+  // Indy cannot start from credential request
+  w3c: W3CCredentialFormat
+}
+
+interface RequestCredentialOptions {
+  connectionId: string
+  // As indy cannot start from request and w3c is not supported in v1 we always use v2 here
+  // protocolVersion: ProtocolVersion
+  credentialFormats: RequestCredentialFormats
+  autoAcceptCredential?: AutoAcceptCredential
+  comment?: string
+}
+
+interface AcceptRequestOptions {
+  credentialRecordId: string
+  comment?: string
+  autoAcceptCredential?: AutoAcceptCredential
+}
+
 export {
-  OfferCredentialTemplate,
-  ProposeCredentialTemplate,
-  AcceptProposalTemplate,
+  OfferCredentialOptions,
+  ProposeCredentialOptions,
+  AcceptProposalOptions,
   CredentialRecord,
   CredentialExchangeRecord,
-  NegotiateProposalTemplate,
+  NegotiateProposalOptions,
+  AcceptOfferOptions,
+  NegotiateOfferOptions,
+  RequestCredentialOptions,
+  AcceptRequestOptions,
+  CredentialRecordTags,
 }

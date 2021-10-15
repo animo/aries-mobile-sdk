@@ -1,4 +1,4 @@
-# CredentialsModule -- examples
+# CredentialsModule example
 
 ### Offer credential
 
