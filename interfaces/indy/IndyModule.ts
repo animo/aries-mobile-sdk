@@ -1,4 +1,4 @@
-import { NymRole, GetNymResponse, SchemaTemplate, Schema, CredentialDefinitionTemplate, CredDef } from './interfaces'
+import { SchemaTemplate, Schema, CredentialDefinitionTemplate, CredDef } from './interfaces'
 
 interface LedgerModule {
   registerSchema(schema: SchemaTemplate): Promise<Schema>
