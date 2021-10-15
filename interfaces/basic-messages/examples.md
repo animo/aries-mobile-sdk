@@ -3,7 +3,8 @@
 ### Send message
 
 ```typescript
-const basicMessage = await agent.basicMessages.sendMessage('2589e15b-bcb2-42fc-b238-5c9bcbf51d54', {
+const basicMessage = await agent.basicMessages.sendMessage({
+  connectionId: '2589e15b-bcb2-42fc-b238-5c9bcbf51d54',
   message: 'Hey there!',
 })
 ```

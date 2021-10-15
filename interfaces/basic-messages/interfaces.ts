@@ -1,4 +1,5 @@
 interface SendBasicMessageOptions {
+  connectionId: string
   message: string
 }
 
