@@ -1,0 +1,13 @@
+{
+  "name": "aries-mobile-sdk",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "format": "prettier '**/*.+(js|json|ts|md|yml|yaml)' --write",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1",
+    "husky": "^7.0.0"
+  }
+}
