@@ -14,7 +14,4 @@ interface OutOfBandMessageConfig {
   attachment: RequestAttachment[]
 }
 
-export {
-  RequestAttachment,
-  OutOfBandMessageConfig
-}
+export { RequestAttachment, OutOfBandMessageConfig }

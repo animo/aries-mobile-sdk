@@ -23,7 +23,7 @@ interface LDCredential {
   proof?: Record<string, AnyJson> | Array<Record<string, AnyJson>>
   [x: string]: AnyJson
 }
-interface W3CCredentialFormat {
+export interface W3CCredentialFormat {
   credential: {
     '@context': string | Record<string, AnyJson>
     issuer: Issuer
@@ -45,7 +45,7 @@ interface IndyCredentialAttribute {
   value: string
 }
 
-enum ProtocolVersion {
+export enum ProtocolVersion {
   v1 = '1',
   v2 = '2',
 }
@@ -239,4 +239,5 @@ export {
   RequestCredentialOptions,
   AcceptRequestOptions,
   CredentialRecordTags,
+  IndyProposeCredentialFormat,
 }
