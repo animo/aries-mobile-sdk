@@ -31,4 +31,11 @@ export interface CredentialExchangeRecord extends BaseRecord {
   
     // This can be a derived getter property (based on state and whether we have a credential)
     role: CredentialRole
+
+    // FIXME: allow for multiple credentials
+    // This should somehow link to the credentials that are stored
+    // based on this credential exchange. Only applicable for the holder
+    // This can point to either indy or jsonld creds so only an id is not enough
+    // or it should include a prefix like (indy-671bc529-6ce2-4ef4-aaa6-8aa049d3b479 or w3c-c4cd9ad6-0b3c-4ac9-a09c-87db6b6b96a0)
+    credentials: string[]
 }

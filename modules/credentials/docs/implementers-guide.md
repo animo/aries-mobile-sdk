@@ -2,6 +2,55 @@
 
 This documents gives an overview of the envisioned architecture for the AIP 2.0 compliant `CredentialsModule`.
 
+
+## Folder Structure
+
+```
+src/
+    modules/
+        credentials/
+            v1/
+                messages/
+                    V1ProposeCredentialMessage.ts
+                    ... other messages ...
+                handlers/
+                    V1ProposeCredentialHandler.ts
+                    ... other handlers ...
+                V1CredentialService.ts                          # only supports indy format, so can use that class directly
+            v2/
+                messages/
+                    V2ProposeCredentialMessage.ts
+                    ... other messages ...
+                handlers/
+                    V2ProposeCredentialHandler.ts
+                    ... other handlers ...
+                V2CredentialService.ts                          # declares which formats it supports through mapping
+            formats/
+                CredentialFormatService.ts
+                indy/
+                    IndyCredentialFormatService.ts
+                jsonld/
+                    JsonLdCredentialFormatService.ts
+            CredentialRecord.ts
+            CredentialRepository.ts
+            CredentialService.ts                                # can return implementation specific handlers (v1, v2, etc...) for registration in the disptacher to the module
+            CredentialModule.ts
+        indy/                                                   # all logic in this folder is agnostic of DIDComm and its protocols        
+            IndyIssuerService.ts                                # handles issuance of indy credentials
+            IndyHolderService.ts                                # handles receiving/holding of indy credentials
+            IndyVerifierService.ts                              # handles verififcation of indy credentials
+        w3c/                                                    # all logic in this folder is agnostic of DIDComm and its protocols      
+            W3cVcService.ts                                     # handles issuing/holding/proving/verifying w3c credentials
+            W3cVcRecord.ts                                      # w3c vc record to store received credentials
+            W3cVcRepository.ts                                  # repository to retrieve / store / delete w3c credentials
+```
+
+
+## Requirements
+
+- `AutoAcceptCredential` should be taken into account, especially the `ContentApproved`. This means 
+
+
 ## Credential formats
 
 One of the primary features of [issue-credential v2](https://github.com/hyperledger/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md), is the introduction of new credential formats. In AFJ, we're only looking to add support for JSON-LD credentials for now.
@@ -48,26 +97,3 @@ This is where all `v1` specific functionality is implemented.
 #### CredentialServiceV2
 
 This is where all `v2` specific functionality is implemented. This service also needs a **mechanism** to add support for other formats later on.
-
-## Requirements
-
-- `AutoAcceptCredential` should be taken into account 
-
-
-```
-src/
-    modules/
-        credentials/
-    vc/
-        indy/
-            IndyIssuerService.ts
-            IndyHolderService.ts
-            IndyVerifierService.ts
-        w3c/
-            W3cVcService.ts
-            W3cVcRecord.ts
-```
-
-<!-- Service versions = mapping -->
-<!-- TODO CredentialRecord  -->
-<!-- TODO Credential  -->
