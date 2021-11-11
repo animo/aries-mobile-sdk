@@ -49,6 +49,10 @@ This is where all `v1` specific functionality is implemented.
 
 This is where all `v2` specific functionality is implemented. This service also needs a **mechanism** to add support for other formats later on.
 
+## Requirements
+
+- 
+
 <!-- Service versions = mapping -->
 <!-- TODO CredentialRecord  -->
 <!-- TODO Credential  -->
