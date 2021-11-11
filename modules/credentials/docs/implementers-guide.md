@@ -51,7 +51,22 @@ This is where all `v2` specific functionality is implemented. This service also 
 
 ## Requirements
 
-- 
+- `AutoAcceptCredential` should be taken into account 
+
+
+```
+src/
+    modules/
+        credentials/
+    vc/
+        indy/
+            IndyIssuerService.ts
+            IndyHolderService.ts
+            IndyVerifierService.ts
+        w3c/
+            W3cVcService.ts
+            W3cVcRecord.ts
+```
 
 <!-- Service versions = mapping -->
 <!-- TODO CredentialRecord  -->
