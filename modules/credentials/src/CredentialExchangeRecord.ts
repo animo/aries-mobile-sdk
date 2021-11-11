@@ -1,8 +1,8 @@
+import { BaseRecord, AutoAcceptCredential } from '@aries-framework/core'
 
-
-import { CredentialProtocolVersion } from './models/CredentialProtocolVersion'
-import { CredentialRole } from './models/CredentialRole'
-import { CredentialState } from './models/CredentialState'
+import { CredentialProtocolVersion } from './CredentialProtocolVersion'
+import { CredentialRole } from './CredentialRole'
+import { CredentialState } from './CredentialState'
 
 export interface CredentialRecordTags {
     threadId: string
@@ -32,36 +32,3 @@ export interface CredentialExchangeRecord extends BaseRecord {
     // This can be a derived getter property (based on state and whether we have a credential)
     role: CredentialRole
 }
-
-export interface CredentialFormatRecord {
-    // Pointer to the credential exchange record
-    credentialExchangeId?: string
-
-    // Pointer to the stored credential
-    // FIXME: do we need a type or something?
-    credentialId?: string
-}
-
-export interface IndyCredentialFormatRecord extends CredentialFormatRecord {
-    // Credential request metadata
-    requestMetadata?:  Record<string, unknown>
-
-    // -- Issuer data -- //
-    // Revocation metadata
-    revocationRegistryId?: string
-    credentialRevocationId?: string
-
-    // Credential metadata (can be computed?)
-    schemaId?: string
-    credentialDefinitionId?: string
-
-    // FIXME: do we want to store credentials?
-    attributes: string[]
-}
-
-
-// This doesn't have any unique values yet, but will definitely get properties
-// over time if e.g. revocation support is added for w3c credentials.
-export interface JsonLdCredentialFormatRecord extends CredentialFormatRecord {
-}
-

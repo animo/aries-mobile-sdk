@@ -1,4 +1,5 @@
-import { AnyJson } from '../generic'
+import { BaseRecord } from '@aries-framework/core'
+import { AnyJson } from '../../generic'
 
 export enum DidCommMessageRole {
     Sender = 'sender',
@@ -28,5 +29,4 @@ export interface DidCommMessageRecord extends BaseRecord {
     // Should this also account for that? Or does the OOB record point 
     // to the specific record message
     connectionId?: string
-
 }

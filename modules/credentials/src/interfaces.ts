@@ -1,4 +1,7 @@
-import { AnyJson, JsonMap } from '../../generic'
+import { AutoAcceptCredential } from '@aries-framework/core'
+import { AnyJson, } from '../../generic'
+import { CredentialProtocolVersion } from './CredentialProtocolVersion'
+
 type IssuerId = string
 
 interface IssuerNode {
@@ -6,23 +9,9 @@ interface IssuerNode {
   [x: string]: AnyJson
 }
 
-type Issuer = IssuerId | IssuerNode
+export type Issuer = IssuerId | IssuerNode
 type LDSignatureSuite = 'Ed25519Signature2018' | 'BbsBlsSignature2020'
 
-export enum AutoAcceptCredential {
-  Always = 'always',
-  ContentApproved = 'contentApproved',
-  Never = 'never',
-}
-
-interface W3cCredential {
-  '@context': string | Record<string, AnyJson>
-  issuer: Issuer
-  type: string | string[]
-  issuanceDate: string
-  proof?: Record<string, AnyJson> | Array<Record<string, AnyJson>>
-  [x: string]: AnyJson
-}
 export interface W3CCredentialFormat {
   credential: {
     '@context': string | Record<string, AnyJson>
@@ -58,7 +47,7 @@ interface OfferCredentialFormats {
 
 interface OfferCredentialOptions {
   connectionId: string
-  protocolVersion: ProtocolVersion
+  protocolVersion: CredentialProtocolVersion
   credentialFormats: OfferCredentialFormats
   autoAcceptCredential?: AutoAcceptCredential
   comment?: string
@@ -90,15 +79,15 @@ interface IndyProposeCredentialFormat {
 }
 
 interface ProposeCredentialFormats {
-  indy?: IndyProposeCredentialFormat
   // If you want to propose an indy credential without attributes or
   // any of the other properties you should pass an empty object
+  indy?: IndyProposeCredentialFormat
   w3c?: W3CCredentialFormat
 }
 
 interface ProposeCredentialOptions {
   connectionId: string
-  protocolVersion: ProtocolVersion
+  protocolVersion: CredentialProtocolVersion
   credentialFormats: ProposeCredentialFormats
   autoAcceptCredential?: AutoAcceptCredential
   comment?: string
@@ -116,7 +105,7 @@ interface AcceptProposalOptions {
       attributes?: IndyCredentialAttribute[]
     }
     w3c?: {
-      options: {} // TODO: depends on credential options we define globally (created, verificationMethod, etc...)
+      // TODO
     }
   }
 }
@@ -154,13 +143,10 @@ export {
   OfferCredentialOptions,
   ProposeCredentialOptions,
   AcceptProposalOptions,
-  CredentialRecord,
-  CredentialExchangeRecord,
   NegotiateProposalOptions,
   AcceptOfferOptions,
   NegotiateOfferOptions,
   RequestCredentialOptions,
   AcceptRequestOptions,
-  CredentialRecordTags,
   IndyProposeCredentialFormat,
 }

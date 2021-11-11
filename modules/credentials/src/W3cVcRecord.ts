@@ -1,3 +1,15 @@
+import {AnyJson } from '../../generic'
+import { Issuer } from './interfaces'
+
+export interface W3cCredential {
+    '@context': string | Record<string, AnyJson>
+    issuer: Issuer
+    type: string | string[]
+    issuanceDate: string
+    proof?: Record<string, AnyJson> | Array<Record<string, AnyJson>>
+    [x: string]: AnyJson
+}
+
 // Most of these tags can be computed from the credential values on save
 export interface W3cCredentialRecordTags {
     proofType: string[]
