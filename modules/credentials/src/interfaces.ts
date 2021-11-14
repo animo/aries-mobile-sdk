@@ -1,5 +1,5 @@
 import { AutoAcceptCredential } from '@aries-framework/core'
-import { AnyJson, } from '../../generic'
+import { AnyJson } from '../../generic'
 import { CredentialProtocolVersion } from './CredentialProtocolVersion'
 
 type IssuerId = string

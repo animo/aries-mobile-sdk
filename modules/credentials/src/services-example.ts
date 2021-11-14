@@ -17,8 +17,6 @@ class CredentialServiceV1 implements CredentialService {
   }
 }
 
-
-
 class CredentialServiceV2 implements CredentialService {
   public async createProposal(proposal: ProposeCredentialOptions): Promise<{ record: CredentialRecord; message: AgentMessage }> {
     // should handle all formats in proposal.credentialFormats by querying and calling
