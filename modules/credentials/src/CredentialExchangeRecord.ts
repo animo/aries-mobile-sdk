@@ -11,6 +11,16 @@ export interface CredentialRecordTags {
   connectionId?: string
 }
 
+enum CredentialRecordType {
+  INDY,
+  W3C,
+}
+
+interface CredentialRecordBinding {
+  credentialRecordType: CredentialRecordType
+  credentialRecordId: string
+}
+
 // Base Record already available in AFJ
 export interface CredentialExchangeRecord extends BaseRecord {
   // in case of connection less exchange, connection id can be null
@@ -32,10 +42,9 @@ export interface CredentialExchangeRecord extends BaseRecord {
   // This can be a derived getter property (based on state and whether we have a credential)
   role: CredentialRole
 
-  // FIXME: allow for multiple credentials
-  // This should somehow link to the credentials that are stored
-  // based on this credential exchange. Only applicable for the holder
-  // This can point to either indy or jsonld creds so only an id is not enough
-  // or it should include a prefix like (indy-671bc529-6ce2-4ef4-aaa6-8aa049d3b479 or w3c-c4cd9ad6-0b3c-4ac9-a09c-87db6b6b96a0)
-  credentials: string[]
+  // This value binds the CredentialExchangeRecord to the actual credential records.
+  // Because we can have multiple credential record types (Indy & W3C), a credential
+  // record id alone doesn't tell us where to look for the credential.
+  // Therefore we use the CredentialRecordBinding interface to specify the credential // record id, as well as the type.
+  credentials: CredentialRecordBinding[]
 }

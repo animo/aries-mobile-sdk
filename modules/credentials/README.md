@@ -113,6 +113,14 @@ The implementation should take the `AutoAcceptCredential` parameter into account
 
 One of the primary features of [issue-credential v2](https://github.com/hyperledger/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md), is the introduction of new credential formats. In AFJ, we're only looking to add support for W3C JSON-LD credentials for now. However, there **MUST** be an architectural separation between the credential format related logic and all other logic. This is to ensure we can add other formats over time, without having to modify a lot of the other logic.
 
+### Storage records
+
+In the current architecture, we store DIDComm messages related information in the credential record itself. Because Indy records don't allow us to add custom fields and because of the introduction of the `W3cCredentialRecord` we need another way to bind `CredentialExchangeRecord`s and `DidCommMessageRecord`s to the Indy and W3C credential record types.
+
+In order to bind the `CredentialExchangeRecord` to the `DidCommMessageRecord`, the `threadId` value present in both record classes can be used. To link the `CredentialExchangeRecord` to the W3C and Indy credential records, we've added a `credentials` array to `CredentialExchangeRecord`. This array is of type `CredentialRecordBinding` which contains `credentialRecordType` (either Indy or W3C) and `credentialRecordId` fields. The `credentialRecordType` field can be used to identify what repository to query for the `credentialId` in question.
+
+> NOTE: All types mentioned above can be found in the `/src` directory next to this document.
+
 ### Typings
 
 One of the major reasons AFJ is implemented in TypeScript is because type definitions can help contributors and users understand how the code works. Therefore, every input parameter and return value **MUST** have a type definition. In other words: try to avoid using `any` as much as possible.
