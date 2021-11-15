@@ -1,6 +1,5 @@
 import {
   OfferCredentialOptions,
-  CredentialExchangeRecord,
   ProposeCredentialOptions,
   AcceptProposalOptions,
   NegotiateProposalOptions,
@@ -9,6 +8,8 @@ import {
   RequestCredentialOptions,
   AcceptRequestOptions,
 } from './interfaces'
+
+import { CredentialExchangeRecord } from './CredentialExchangeRecord'
 
 interface CredentialModule {
   // Proposal

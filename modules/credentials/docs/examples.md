@@ -47,10 +47,9 @@ const record = await agent.credentials.offerCredential({
         // For the first version we don't intent to support JWT vc
         // Thi is to show how the API can be extended in the future
         jwt: {
-          // JWT doesn't support multiple signatures, so maybe this shouldn't be an array?
-          alg: ['EdDSA', 'another'],
+          alg: 'EdDSA',
         },
-        linkedDataProof: {
+        jsonLd: {
           // For the first version we only intend to support a single proof
           proofType: ['Ed25519Signature2018', 'BbsBlsSignature2020'],
         },
