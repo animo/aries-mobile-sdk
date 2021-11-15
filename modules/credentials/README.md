@@ -17,6 +17,7 @@ This documents gives an overview of the envisioned architecture for the AIP 2.0 
   - [Unified API](#unified-api)
   - [Auto accept](#auto-accept)
   - [Credential formats](#credential-formats)
+  - [Storage records](#storage-records)
   - [Typings](#typings)
 - [Code examples](#code-examples)
 
