@@ -18,6 +18,7 @@ This documents gives an overview of the envisioned architecture for the AIP 2.0 
   - [Auto accept](#auto-accept)
   - [Credential formats](#credential-formats)
   - [Storage records](#storage-records)
+  - [External dependencies](#external-dependencies)
   - [Typings](#typings)
 - [Code examples](#code-examples)
 
