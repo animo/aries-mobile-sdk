@@ -18,6 +18,9 @@ This documents gives an overview of the envisioned architecture for the AIP 2.0 
   - [Auto accept](#auto-accept)
   - [Credential formats](#credential-formats)
   - [Storage records](#storage-records)
+  - [External dependencies](#external-dependencies)
+    - [VC-JS](#vc-js)
+    - [Signature suits (Ed25519Signature2018)](#signature-suits-ed25519signature2018)
   - [Typings](#typings)
 - [Code examples](#code-examples)
 
@@ -121,6 +124,22 @@ In the current architecture, we store DIDComm messages related information in th
 In order to bind the `CredentialExchangeRecord` to the `DidCommMessageRecord`, the `threadId` value present in both record classes can be used. To link the `CredentialExchangeRecord` to the W3C and Indy credential records, we've added a `credentials` array to `CredentialExchangeRecord`. This array is of type `CredentialRecordBinding` which contains `credentialRecordType` (either Indy or W3C) and `credentialRecordId` fields. The `credentialRecordType` field can be used to identify what repository to query for the `credentialId` in question.
 
 > NOTE: All types mentioned above can be found in the `/src` directory next to this document.
+
+### External dependencies
+
+With the introduction of new credential formats, we need additional logic to handle signatures, verification and for the creation of verifiable presentations. For Indy based credentials, we can use the Indy SDK / Shared Components. For W3C based credentials, we need another solution.
+
+#### VC-JS
+
+Digital Bazaar has created various libraries we can use for this purpose such as [VC-JS](https://github.com/digitalbazaar/vc-js) and various signature suits. However, these libraries rely on NodeJS or browser specific crypto dependencies, making it impossible for usage within React Native. That being said, there are forks of this project available, that rely on pure JavaScript crypto implementations that can be used.
+
+The React Native compatible VC-JS fork we're looking to adopt is [this one](https://github.com/digitalcredentials/vc-js) by the Digital Credentials Consortium.
+
+#### Signature Suits (Ed25519Signature2018)
+
+The Digital Credentials Consortium has also created a React Native compatible version of the [ed25519-signature-2020](https://github.com/digitalcredentials/ed25519-signature-2020) signature suit. However, AIP 2.0 requires us to use Ed25519Signature2018 instead of Ed25519Signature2020, which (to our knowledge) doesn't have a React Native compatible version out there. Thus, this has to be created.
+
+That being said, the cryptography of the Ed25519Signature2018 and Ed25519Signature2020 suits is identical. Therefore the already existing JavaScript implementation of the crypto library used in the Ed25519Signature2018 fork can be used here as well. This should make the implementation fairly straightforward and lightweight.
 
 ### Typings
 
