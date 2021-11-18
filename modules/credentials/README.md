@@ -21,6 +21,7 @@ This documents gives an overview of the envisioned architecture for the AIP 2.0 
   - [External dependencies](#external-dependencies)
     - [VC-JS](#vc-js)
     - [Signature suits (Ed25519Signature2018)](#signature-suits-ed25519signature2018)
+    - [Architectural separation of credential logic and signature suits](#architectural-separation-of-credential-logic-and-signature-suits)
   - [Typings](#typings)
 - [Code examples](#code-examples)
 
@@ -135,11 +136,17 @@ Digital Bazaar has created various libraries we can use for this purpose such as
 
 The React Native compatible VC-JS fork we're looking to adopt is [this one](https://github.com/digitalcredentials/vc-js) by the Digital Credentials Consortium.
 
-#### Signature Suits (Ed25519Signature2018)
+#### Signature suits (Ed25519Signature2018)
 
 The Digital Credentials Consortium has also created a React Native compatible version of the [ed25519-signature-2020](https://github.com/digitalcredentials/ed25519-signature-2020) signature suit. However, AIP 2.0 requires us to use Ed25519Signature2018 instead of Ed25519Signature2020, which (to our knowledge) doesn't have a React Native compatible version out there. Thus, this has to be created.
 
 That being said, the cryptography of the Ed25519Signature2018 and Ed25519Signature2020 suits is identical. Therefore the already existing JavaScript implementation of the crypto library used in the Ed25519Signature2018 fork can be used here as well. This should make the implementation fairly straightforward and lightweight.
+
+#### Architectural separation of credential logic and signature suits
+
+In order to be able to easily add other signature suits at a later stage, we intent to separate the credential specific logic (VC-JS) from the signature suits themselves. This can be done by creating an abstraction layer between the two. The approach here is very similar to how the implementation inside of ACA-Py works. Therefore, you may use [this](https://github.com/hyperledger/aries-cloudagent-python/tree/main/aries_cloudagent/vc) as a reference.
+
+> NOTE: The signature suit specific logic lives in one of the sub-directories, which can be found [here](https://github.com/hyperledger/aries-cloudagent-python/tree/main/aries_cloudagent/vc/ld_proofs/suites).
 
 ### Typings
 
