@@ -20,7 +20,7 @@ This documents gives an overview of the envisioned architecture for the AIP 2.0 
   - [Storage records](#storage-records)
   - [External dependencies](#external-dependencies)
     - [VC-JS](#vc-js)
-    - [Signature suits (Ed25519Signature2018)](#signature-suits-ed25519signature2018)
+    - [Signature suites (Ed25519Signature2018)](#signature-suites-ed25519signature2018)
     - [Architectural separation of credential logic and signature suits](#architectural-separation-of-credential-logic-and-signature-suits)
   - [Typings](#typings)
 - [Code examples](#code-examples)
