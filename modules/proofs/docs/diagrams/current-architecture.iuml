@@ -1,0 +1,38 @@
+@startuml
+
+skinparam packageStyle rectangle
+
+skinparam monochrome true
+
+top to bottom direction
+
+package "Module Layer" {
+  class ProofModule
+}
+
+package "Service Layer" {
+  class ProofService
+  class ConnectionService
+  class LedgerService
+  class IndyHolderService
+  class IndyVerifierService
+}
+
+package "Repository Layer" {
+  class ProofRepository
+}
+
+'Module relations
+ProofModule --> ProofService
+ProofModule --> ConnectionService
+
+'Service relations
+ProofService -left-> ConnectionService
+ProofService -right-> LedgerService
+ProofService -down-> IndyHolderService
+ProofService -down-> IndyVerifierService
+
+ProofService -u-> ProofRepository
+
+
+@enduml

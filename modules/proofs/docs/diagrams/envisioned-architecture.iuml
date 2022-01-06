@@ -1,0 +1,124 @@
+@startuml
+
+skinparam packageStyle rectangle
+skinparam monochrome true
+
+top to bottom direction
+
+package "Module Layer" {
+  class ProofModule
+}
+
+package "Service Layer" {
+  abstract ProofService
+  class ConnectionService
+  class LedgerService
+
+  ' class IndyVDR
+  class CredX
+  class IndySDK
+  ' class AriesAskar
+
+  ' interface IndyHolderService
+  ' class IndySDKHolderService
+  ' class SharedLibrariesHolderService
+
+
+  ' interface IndyIssuerService
+  ' class IndySDKIssuerService
+  ' class SharedLibrariesIssuerService
+
+  class ProofServiceV1
+  class ProofServiceV2
+
+  interface ProofFormat
+  class IndyFormat
+  class DifPresentationExchangeFormat
+
+  interface IndyHolder
+  interface IndyVerifier
+
+  class DifPresentationExchangeService
+
+  ' note bottom of CredX
+  '   This class represents a binding
+  '   to the <b>indy-credx</b> library
+  '   that is part of the new <b>indy-shared-rs</b>
+  '   libraries (which is a replacement for indy-sdk).
+
+  '   You will not have to worry about this right now
+  '   and can use the already existing IndyVerifier 
+  '   class instead.
+  ' end note
+
+}
+
+circle "indy-sdk" as indy
+
+circle "indy-credx" as credx
+circle "pe-js" as pejs
+
+package "Repository Layer" {
+  class ProofRepository
+}
+
+'Module relations
+ProofModule --> ProofService
+ProofModule --> ConnectionService
+
+'Service relations
+ProofService -left-> ConnectionService
+ProofService -right-> LedgerService
+' ProofService -down-> IndyHolderService
+' ProofService -down-> IndyVerifierService
+
+
+ProofServiceV1 -up-|> ProofService
+ProofServiceV2 -up-|> ProofService
+
+ProofService -u-> ProofRepository
+
+IndyFormat -right-|> ProofFormat
+DifPresentationExchangeFormat -left-|> ProofFormat
+
+ProofServiceV1 -down-> IndyFormat
+ProofServiceV2 -down-> ProofFormat
+' ProofServiceV2 -down-> IndyFormat
+' ProofServiceV2 -down-> DifPresentationExchangeFormat
+
+IndyFormat -down-> IndyHolder
+IndyFormat -down-> IndyVerifier
+
+IndyVerifier -down-> CredX
+IndyVerifier -down-> IndySDK
+
+DifPresentationExchangeFormat -down-> DifPresentationExchangeService
+
+IndySDK -down-> indy
+CredX -down-> credx
+DifPresentationExchangeService -down--> pejs
+
+note "These components represent\nexternal libaries" as N1
+
+indy .down. N1
+credx .down. N1
+pejs .down. N1
+
+' IndyHolderService -d-> SharedLibrariesHolderService
+' IndyHolderService -d-> IndySDKHolderService
+' SharedLibrariesHolderService -d-> IndyVDR
+' SharedLibrariesHolderService -d-> IndyCredX
+' SharedLibrariesHolderService -d-> AriesAskar
+
+
+' IndyIssuerService -d-> IndySDKIssuerService
+' IndyIssuerService -d-> SharedLibrariesIssuerService
+' SharedLibrariesIssuerService -d-> IndyVDR
+' SharedLibrariesIssuerService -d-> IndyCredX
+' SharedLibrariesIssuerService -d-> AriesAskar
+
+
+
+
+
+@enduml
